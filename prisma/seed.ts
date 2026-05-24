@@ -29,42 +29,42 @@ async function main() {
   const products = [
     {
       id: "prod-001",
-      name: "Ember Ceramic Mug",
-      sku: "MUG-EMBER-12",
-      description: "Temperature-controlled smart mug. Keeps your drink at the perfect temp for hours.",
-      price: 149.99,
+      name: "Testosterone Test Kit",
+      sku: "TEST-KIT-001",
+      description: "At-home finger-prick blood test. Results in 48 hours with doctor review included.",
+      price: 49.99,
       imageUrl: null,
     },
     {
       id: "prod-002",
-      name: "Aesop Resurrection Hand Wash",
-      sku: "AESOP-HW-500",
-      description: "Parsley seed-scented, botanically infused. 500ml.",
-      price: 42.0,
+      name: "Vitamin D + Zinc Supplements",
+      sku: "SUPP-VDZ-60",
+      description: "60-day supply. Clinically formulated to support testosterone levels and energy.",
+      price: 29.99,
       imageUrl: null,
     },
     {
       id: "prod-003",
-      name: "Ridge Wallet (Carbon Fibre)",
-      sku: "RIDGE-CF-001",
-      description: "Minimalist RFID-blocking wallet. Carbon fibre finish.",
-      price: 95.0,
+      name: "Online Doctor Consultation",
+      sku: "CONSULT-30MIN",
+      description: "30-minute private video consultation with a licensed men's health specialist.",
+      price: 79.00,
       imageUrl: null,
     },
     {
       id: "prod-004",
-      name: "Anker 100W USB-C Hub",
-      sku: "ANKER-USB-100",
-      description: "7-in-1 hub with 4K HDMI, 100W PD, and USB 3.2 ports.",
-      price: 79.99,
+      name: "ED Treatment Pack (3 Month)",
+      sku: "ED-PACK-3M",
+      description: "3-month prescribed treatment plan. Discreet packaging, delivered to your door.",
+      price: 149.00,
       imageUrl: null,
     },
     {
       id: "prod-005",
-      name: "Limited Edition Air Jordan 1",
-      sku: "AJ1-RETRO-LTD",
-      description: "Chicago colourway. Very limited stock — don't sleep on it.",
-      price: 399.0,
+      name: "Premium Health Monitoring Kit",
+      sku: "MON-KIT-PRO",
+      description: "Comprehensive at-home kit — testosterone, cortisol, vitamin D, thyroid. Very limited stock.",
+      price: 199.00,
       imageUrl: null,
     },
   ];
@@ -80,20 +80,19 @@ async function main() {
   console.log("Products seeded:", products.length);
 
   const stockEntries = [
-    { productId: "prod-001", warehouseId: "wh-london",     total: 40, reserved: 0 },
+    { productId: "prod-001", warehouseId: "wh-london",      total: 40, reserved: 0 },
     { productId: "prod-001", warehouseId: "wh-manchester",  total: 25, reserved: 0 },
-    { productId: "prod-002", warehouseId: "wh-london",     total: 100, reserved: 0 },
-    { productId: "prod-002", warehouseId: "wh-glasgow",    total: 60,  reserved: 0 },
+    { productId: "prod-002", warehouseId: "wh-london",      total: 100, reserved: 0 },
+    { productId: "prod-002", warehouseId: "wh-glasgow",     total: 60,  reserved: 0 },
     { productId: "prod-003", warehouseId: "wh-manchester",  total: 15,  reserved: 0 },
-    { productId: "prod-003", warehouseId: "wh-glasgow",    total: 8,   reserved: 0 },
-    { productId: "prod-004", warehouseId: "wh-london",     total: 50,  reserved: 0 },
+    { productId: "prod-003", warehouseId: "wh-glasgow",     total: 8,   reserved: 0 },
+    { productId: "prod-004", warehouseId: "wh-london",      total: 50,  reserved: 0 },
     { productId: "prod-004", warehouseId: "wh-manchester",  total: 30,  reserved: 0 },
-    { productId: "prod-004", warehouseId: "wh-glasgow",    total: 20,  reserved: 0 },
-    // Air Jordan deliberately scarce to demo race condition protection
-    { productId: "prod-005", warehouseId: "wh-london",     total: 2,   reserved: 0 },
+    { productId: "prod-004", warehouseId: "wh-glasgow",     total: 20,  reserved: 0 },
+    // Premium Kit deliberately scarce to demo race condition protection
+    { productId: "prod-005", warehouseId: "wh-london",      total: 2,   reserved: 0 },
     { productId: "prod-005", warehouseId: "wh-manchester",  total: 1,   reserved: 0 },
   ];
-
   for (const s of stockEntries) {
     await prisma.stock.upsert({
       where: {
