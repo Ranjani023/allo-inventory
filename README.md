@@ -2,8 +2,8 @@
 
 A Next.js 15 inventory and reservation system with race-condition-safe stock holds.
 
-**Live URL:** _[deploy to Vercel and paste URL here]_  
-**Repo:** _[paste GitHub URL here]_
+Live URL: https://allo-inventory-git-main-ranjani-v-s-projects.vercel.app
+Repo: https://github.com/Ranjani023/allo-inventory
 
 ---
 
@@ -77,7 +77,10 @@ Two complementary mechanisms:
 Every `GET /api/products` call runs `releaseExpiredReservations()` before querying stock. This means available counts are always fresh for the product listing. Individual reservation reads (`GET /api/reservations/:id`) also check and expire on the fly.
 
 **2. Vercel Cron (production)**  
-`vercel.json` schedules `GET /api/cron/expire` every minute. This ensures reservations are released promptly even if traffic is low — a user who abandons checkout without refreshing the product page won't hold units indefinitely.
+2. Vercel Cron (production)
+The /api/cron/expire endpoint exists and can be triggered externally.
+On the Hobby plan, Vercel Cron requires daily schedule minimum — 
+lazy cleanup handles expiry in the interim.
 
 The two mechanisms are idempotent: `UPDATE ... WHERE status = 'PENDING' AND expiresAt < NOW()` is safe to run concurrently.
 
